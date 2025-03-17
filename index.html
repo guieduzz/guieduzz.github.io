@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperflow Embed</title>
+    <style>
+        /* Estilos padrão (Modo Escuro) */
+        body {
+            background-color: #333;
+            color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+
+        }
+
+        /* Contêiner para os botões fixos */
+        .fixed-buttons {
+            top: 20px;
+            left: 20px;
+            /* Alinhado à esquerda */
+            display: inline-flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+            /* Assegura que os botões fiquem sobre outros elementos */
+        }
+
+        /* Estilos para os botões de alternância e limpeza */
+        .fixed-buttons button {
+            background-color: #444;
+            border: none;
+            color: #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fixed-buttons button:hover {
+            background-color: #555;
+        }
+
+        /* Modo Claro */
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+        .light-mode .fixed-buttons button {
+            background-color: #ddd;
+            color: #000;
+        }
+
+        .light-mode .fixed-buttons button:hover {
+            background-color: #ccc;
+        }
+
+        /* Ícones nos botões */
+        .button-icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Contêiner para os Botões Fixos -->
+    <div class="fixed-buttons">
+        <!-- Botão de Alternância de Tema -->
+        <button class="toggle-button" id="theme-toggle">
+            <span class="button-icon">🌙</span>Modo Escuro</button>
+            <button onclick="window.location.href='index2.html'">Página 2</button>
+            <button onclick="window.location.href='index3.html'">Página 3</button>
+
+    </div>
+    <div class="fixed-buttons">
+    </div>
+    <div class="fixed-buttons">
+    </div>
+
+
+    <script src=https://webchat.hyperflow.global/sdk.js></script>
+    <script>Hyperflow.init("67ba37fe062b6bf7aaeff7ca41185b56")</script>
+
+
+    <!-- Scripts para funcionalidade dos botões -->
+    <script>
+        // Seleção dos elementos
+        const toggleButton = document.getElementById('theme-toggle');
+        const bodyElement = document.body;
+
+        // Função para atualizar o texto do botão de tema
+        function updateThemeButton() {
+            if (bodyElement.classList.contains('light-mode')) {
+                toggleButton.innerHTML = '<span class="button-icon">🌙</span>Modo Escuro';
+            } else {
+                toggleButton.innerHTML = '<span class="button-icon">☀️</span>Modo Claro';
+            }
+        }
+
+        // Verificar preferência salva no localStorage
+        if (localStorage.getItem('theme') === 'light') {
+            bodyElement.classList.add('light-mode');
+        }
+
+        updateThemeButton();
+
+        // Evento de clique para alternar o tema
+        toggleButton.addEventListener('click', () => {
+            bodyElement.classList.toggle('light-mode');
+            // Salvar preferência no localStorage
+            if (bodyElement.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeButton();
+        });
+    </script>
+</body>
+
+</html>
